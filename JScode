@@ -3,7 +3,6 @@ var wordLower;
 var wordArray;
 var wordArrayLower
 var wordArrayHidden = [];
-let letter;
 var lettersCorrect;
 var lives;
 
