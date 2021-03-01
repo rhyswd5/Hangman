@@ -1,0 +1,149 @@
+var word;
+var wordLower; 
+var wordArray;
+var wordArrayLower
+var wordArrayHidden = [];
+let letter;
+var lettersCorrect;
+var lives;
+
+const letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+
+//all possible word/phrases that could be chosen for the game
+const words = {
+	Books: ['The Hunger Games', 'A Series of Unfortunate Events', 'Wuthering Heights', 'The Grapes of Wrath', 'Lord of the Flies', 'The Great Gatsby', 'To Kill a Mockingbird', 'Pride an Prejudice', 'The Hungry Caterpillar'],
+	Places: ['Taj Mahal', 'The Great Wall of China', 'Buckingham Palace', 'The Pyramids', 'Rio de Janeiro', 'Sydney Opera House', 'Central Park', 'Washington DC', 'Paris'],
+	Films: ['Pulp Fiction', 'Lord of the Rings', 'Inception', 'La La Land', 'The Dark Knight', 'The Breakfast Club', 'The Sound of Music', 'Airplane', 'The Polar Express'],
+	Characters: ['Harry Potter', 'James Bond', 'Frodo Baggins', 'Willy Wonka', 'Darth Vader', 'Catwoman', 'Sherlock Holmes', 'Marry Poppins', 'Snow White'],
+	Animals: ['Elephant', 'Orangutan', 'Spider Monkey', 'Zebra', 'Stick Insect', 'Beluga Whale', 'Crocodile', 'Black Widow Spider', 'Rhinoceros']
+}
+
+
+function beginGame () {
+
+	lettersCorrect = 0;
+	lives = 10;
+
+	//setting up display for start of game
+	document.querySelector('#livesCount').innerText=lives;
+	document.querySelector('#input').style.display = 'block';
+	document.querySelector('#output').style.display = 'block';
+	document.querySelector('#winorlose').style.display = 'none';
+	document.querySelector('#category').style.display = 'none';
+	document.querySelector('#displayCategory').style.display = 'block';
+
+	letters.forEach(letter => {
+		document.querySelector(`#${letter}`).style.background = '#ddd';
+		document.querySelector(`#${letter}`).style.color = 'black';
+	});
+
+	//defining which category is selected
+	var category = document.getElementById('select-category');
+	var categoryOption = category.options[category.selectedIndex].value;
+
+	document.querySelector('#displayCategory').innerText = categoryOption;
+
+	//choosing random word/phrase from the chosen category and creating arrays for the word, lower case word and hidden word
+	word = words[categoryOption][Math.floor(Math.random()*9)];
+	wordLower = word.toLowerCase()
+	
+	wordArray = [];
+	wordArrayLower = [];
+	wordArrayHidden = [];
+	wordArray = word.split('');
+	wordArrayLower = wordLower.split('');
+	
+
+	for (i = 0; i < wordArray.length; i++) {
+		if (wordArray[i] !== ' ') {
+			wordArrayHidden.push('_');
+		}
+		else {
+			wordArrayHidden.push(' ');
+		}
+	}
+
+	document.querySelector('#word').innerText = wordArrayHidden.join('');
+
+	for (i=0; i<wordArray.length; i++) {
+		if (wordArray[i] == ' ') {
+			lettersCorrect++;
+		}
+	}
+}
+
+//checks if the selected letter is in the random word
+function checkLetter(l) {
+	if (wordLower.includes(l)) {
+		updateWord(l);
+	}
+
+	else {
+		loseLives();
+	}
+}
+
+//runs if chosen letter is not in the random word
+function loseLives() {
+	lives--;
+	document.querySelector('#livesCount').innerText=lives;
+		if (lives === 0) {
+			lose()
+		}
+}
+
+//runs if chosen letter is in the random word
+function updateWord(character) {
+	for (i=0 ; i < wordArray.length ; i++) {
+		if (wordArrayLower[i] == character && wordArrayHidden[i] !== wordArray[i]){
+			wordArrayHidden[i] = wordArray[i];
+			lettersCorrect++;
+		
+	document.querySelector('#word').innerText = wordArrayHidden.join('');
+			if (lettersCorrect == wordArrayHidden.length) {
+				win()
+			}
+		}
+	}
+}
+
+//sets up display when all letters are found
+function win() {
+	document.querySelector('#output').style.display = 'none';
+	document.querySelector('#input').style.display = 'none';
+	document.querySelector('#winorlose').style.display = 'block';
+	document.querySelector('#text').innerText = 'You Win!';
+	document.querySelector('#text').style.color = 'green';
+	document.querySelector('#displayCategory').style.display = 'none';
+}
+
+//sets up display if all lives are lost
+function lose() {
+	document.querySelector('#output').style.display = 'none';
+	document.querySelector('#input').style.display = 'none';
+	document.querySelector('#winorlose').style.display = 'block';
+	document.querySelector('#text').innerText = 'You Lose!';
+	document.querySelector('#text').style.color = 'red';
+	document.querySelector('#displayCategory').style.display = 'none';
+}
+
+//restarts the game
+function restart() {
+	document.querySelector('#winorlose').style.display = 'none';
+	document.querySelector('#category').style.display = 'block';
+}
+
+//finds which letter is chosen
+input_element = document.querySelector('#input');
+
+input_element.addEventListener('click', press => {
+	const button_pressed = press.target;
+	letters.forEach(letter => {
+		if (button_pressed.id == letter) {
+			checkLetter(letter);
+			document.querySelector(`#${letter}`).style.background = '#666';
+			document.querySelector(`#${letter}`).style.color = '#eee'
+
+		}
+	})	
+})
