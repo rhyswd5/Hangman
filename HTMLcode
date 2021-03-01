@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+		
+			<title>Hangman</title>
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<script src="https://kit.fontawesome.com/6da2e14f43.js" crossorigin="anonymous"></script>
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<meta charset="UTF-8">
+			<link rel="stylesheet"
+			href="https://fonts.googleapis.com/css?family=Raleway">
+			<link rel="stylesheet"
+			href="https://fonts.googleapis.com/css?family=Quicksand:wght@300&display=swap'">
+			<link rel="stylesheet"
+			href="https://fonts.googleapis.com/css?family=Montserrat">
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+			<link rel="stylesheet"
+			href="hangman-style.css">
+			
+		</head>
+	
+		<body>
+
+			<header class = 'nav-wrap'>
+				<div id='nav-menu'>
+					<a href='conversion-webpage.html'><div class='menu-item'>Conversion Tool</div></a>
+					<a href='calculator-webpage.html'><div class='menu-item'>Calculator</div></a>
+					<a href='hangman-webpage.html'><div class='menu-item'>Hangman</div></a>
+				</div>
+
+				<div id = 'nav-bar'>
+					<div id = 'nav-title'>Rhys Woodard-Davies</div>
+						
+					<a href='../Portfolio_1.html'>
+						<div class='nav-item'>Home</div>
+					</a>
+					
+					<a href='../Portfolio_1.html#about-me'>
+						<div class='nav-item'>About Me</div>
+
+					<a href='../Portfolio_1.html#projects'>
+						<div class='nav-item'>Projects</div>
+					</a>
+
+					<a href='../Portfolio_1.html#contacts'>
+						<div class='nav-item'>Contact</div>
+					</a>
+
+					<button onclick='show_menu()' id='hamburger'><i id='icon' class="fas fa-bars"></i></button>
+
+				</div>
+
+			</header>
+
+			<h1>Hangman</h1>
+
+			<div id = 'category'>
+				<form oninput='beginGame()'>
+					<label for='select-category'>Categories</label>
+					<select name='select-category' id='select-category' value='Select'>
+						<option value='Select'>Select</option>
+						<option value="Films">Films</option>
+						<option value="Places">Places</option>
+						<option value="Books">Books</option>
+						<option value="Characters">Characters</option>
+						<option value="Animals">Animals</option>				
+					</select>
+				</form>
+			</div>
+
+			<div id='displayCategory'></div>
+
+			<div id='input'>
+				<button class='button' id='a'>a</button>
+				<button class='button' id='b'>b</button>
+				<button class='button' id='c'>c</button>
+				<button class='button' id='d'>d</button>
+				<button class='button' id='e'>e</button>
+				<button class='button' id='f'>f</button>
+				<button class='button' id='g'>g</button>
+				<button class='button' id='h'>h</button>
+				<button class='button' id='i'>i</button>
+				<button class='button' id='j'>j</button>
+				<button class='button' id='k'>k</button>
+				<button class='button' id='l'>l</button>
+				<button class='button' id='m'>m</button>
+				<button class='button' id='n'>n</button>
+				<button class='button' id='o'>o</button>
+				<button class='button' id='p'>p</button>
+				<button class='button' id='q'>q</button>
+				<button class='button' id='r'>r</button>
+				<button class='button' id='s'>s</button>
+				<button class='button' id='t'>t</button>
+				<button class='button' id='u'>u</button>
+				<button class='button' id='v'>v</button>
+				<button class='button' id='w'>w</button>
+				<button class='button' id='x'>x</button>
+				<button class='button' id='y'>y</button>
+				<button class='button' id='z'>z</button>
+			</div>
+
+			<div id='output'>
+				
+				<div id='word'>
+				</div>
+
+
+				<div id='lives'>
+					<div>Lives: </div>
+					<div id='livesCount'>10</div>
+				</div>
+
+			</div>
+
+			<div id='winorlose'>
+				<div id='text'>
+				</div>
+				<button class='btn btn-primary' id='restartButton' onclick='restart()'>Restart
+				</button>
+			</div>
+
+
+		<script src='hangman-js.js'></script>
+		<script src='../showmenu.js'></script>
+		</body>
+	</html>
