@@ -1,7 +1,7 @@
 var word;
 var wordLower; 
 var wordArray;
-var wordArrayLower
+var wordArrayLower;
 var wordArrayHidden = [];
 var lettersCorrect;
 var lives;
